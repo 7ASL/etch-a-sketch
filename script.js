@@ -16,4 +16,12 @@ function createGrid(size) {
     }        
 }
 
+function paint(e){
+    if(e.target.id === "cell") {
+        e.target.style.background = "gold";
+    }
+}
+
+container.addEventListener("mouseover", (e) => paint(e))
+
 createGrid(16);
