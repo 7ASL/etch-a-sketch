@@ -1,5 +1,6 @@
 const cellTemplate = document.querySelector("#cell-template");
 const container = document.querySelector("#container");
+const btn = document.querySelector("#restart-game");
 
 function createGrid(size) {
     container.replaceChildren();
@@ -22,6 +23,17 @@ function paint(e){
     }
 }
 
-container.addEventListener("mouseover", (e) => paint(e))
+function startGame(){
+    let input = "" 
+    do {
+        input = prompt("Enter grid size:");
+    } while (isNaN(input));
 
-createGrid(16);
+    let size = input <= 100 ? input : 100;
+    createGrid(size);
+}
+
+container.addEventListener("mouseover", (e) => paint(e));
+btn.addEventListener("click", startGame);
+
+startGame();

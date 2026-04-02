@@ -3,8 +3,8 @@
     flex: 1;
     flex-direction: column;
     border: 3px solid black;
-    width: 960px;
-    height: 960px;
+    width: 480px;
+    height: 480px;
 }
 
 #row {
@@ -16,4 +16,8 @@
     flex: 1;
     box-sizing: border-box;
     border: 1px solid lightgray;
+}
+
+#restart-game{
+    margin: 10px;
 }
