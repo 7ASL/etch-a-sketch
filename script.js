@@ -34,27 +34,22 @@ function paint(cell){
 }
 
 function paintGold(cell){
-    cell.style.background = "gold";
+    cell.style.backgroundColor = "gold";
+    delete cell.dataset.opacity;
 }
 
 function paintRainbow(cell){
-    let randomColor = Math.floor(Math.random()*16777215).toString(16);
-    cell.style.background = "#" + randomColor;
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0");
+    cell.style.backgroundColor = "#" + randomColor;
+    delete cell.dataset.opacity;
 }
 
 function paintProgressive(cell){
-    let background = getComputedStyle(cell).getPropertyValue('background-color');
-    let colors = background.split(", ");
-    colors[0] = parseFloat(colors[0].split("(")[1]);
-    colors[1] = parseFloat(colors[1]);
-    colors[2] = parseFloat(colors[2]);
-    if(colors[0] != "0" && colors[1] != "0" && colors[2] != "0"){
-        cell.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
-    } else {
-        colors[3] = parseFloat(colors[3]) + 0.1;
-        colors = "rgba(" + colors.join(",") + ")";
-        cell.style.backgroundColor = colors;
-    }
+    const currentOpacity = Number(cell.dataset.opacity || 0);
+    const nextOpacity = Math.min(currentOpacity + 0.1, 1);
+
+    cell.dataset.opacity = nextOpacity;
+    cell.style.backgroundColor = `rgba(0, 0, 0, ${nextOpacity})`;
 }
 
 function startGame(){
