@@ -8,9 +8,15 @@
     </head>
     <body>
         <template id="cell-template">
-            <div id="cell"></div>
+            <div class="cell"></div>
         </template>
         <button id="restart-game">Restart the game</button>
+        <label for="mode">Choose a painting mode:</label>
+        <select id="mode">
+            <option value="gold" selected>Gold</option>
+            <option value="rainbow">Rainbow</option>
+            <option value="progressive">Progressive</option>
+        </select>
         <div id="container"></div>
     </body>
 </html>

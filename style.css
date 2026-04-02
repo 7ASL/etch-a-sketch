@@ -7,12 +7,12 @@
     height: 480px;
 }
 
-#row {
+.row {
     display: flex;
     flex: 1;
 }
 
-#cell {
+.cell {
     flex: 1;
     box-sizing: border-box;
     border: 1px solid lightgray;
