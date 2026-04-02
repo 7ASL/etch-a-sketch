@@ -19,43 +19,41 @@ function createGrid(size) {
     }        
 }
 
-function paint(e){
-    if(e.target.classList.contains("cell")) {
-        switch (mode){
-            case "gold":
-                paintGold(e);
-                break;
-            case "rainbow":
-                paintRainbow(e);
-                break;
-            case "progressive":
-                paintProgressive(e);
-                break;
-        }
+function paint(cell){
+    switch (mode){
+        case "gold":
+            paintGold(cell);
+            break;
+        case "rainbow":
+            paintRainbow(cell);
+            break;
+        case "progressive":
+            paintProgressive(cell);
+            break;
     }
 }
 
-function paintGold(e){
-    e.target.style.background = "gold";
+function paintGold(cell){
+    cell.style.background = "gold";
 }
 
-function paintRainbow(e){
+function paintRainbow(cell){
     let randomColor = Math.floor(Math.random()*16777215).toString(16);
-    e.target.style.background = "#" + randomColor;
+    cell.style.background = "#" + randomColor;
 }
 
-function paintProgressive(e){
-    let background = getComputedStyle(e.target).getPropertyValue('background-color');
+function paintProgressive(cell){
+    let background = getComputedStyle(cell).getPropertyValue('background-color');
     let colors = background.split(", ");
     colors[0] = parseFloat(colors[0].split("(")[1]);
     colors[1] = parseFloat(colors[1]);
     colors[2] = parseFloat(colors[2]);
     if(colors[0] != "0" && colors[1] != "0" && colors[2] != "0"){
-        e.target.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+        cell.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
     } else {
         colors[3] = parseFloat(colors[3]) + 0.1;
         colors = "rgba(" + colors.join(",") + ")";
-        e.target.style.backgroundColor = colors;
+        cell.style.backgroundColor = colors;
     }
 }
 
@@ -73,7 +71,11 @@ function startGame(){
     createGrid(size);
 }
 
-container.addEventListener("mouseover", (e) => paint(e));
+container.addEventListener("mouseover", (e) => {
+    if(e.target.classList.contains("cell")) {  
+        paint(e.target)
+    }
+});
 btn.addEventListener("click", startGame);
 select.addEventListener("change", (e) => mode = e.target.value);
 
